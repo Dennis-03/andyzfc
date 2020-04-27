@@ -16,7 +16,7 @@
       <tr>
         <th><%= news.newsHeader %></th>
         <td>
-          <img src="/<%= news.imageSrc %>" width="180" />
+          <img src="<%= news.imageSrc %>" width="180" />
         </td>
         <td><%= news.description %></td>
         <td class="text-capitalize"><%= news.type %></td>
@@ -42,7 +42,7 @@
           news.pubdate.toString().slice(3,15) %> / <%=
           news.pubdate.toString().slice(15,25) %>
           <br />
-          Unpublished:- <%= news.unpubdate.toString().slice(0,15) %> / <%=
+          Unpublished:- <%= news.unpubdate.toString().slice(3,15) %> / <%=
           news.unpubdate.toString().slice(15,25) %>
           <br />
           Archived:-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=
