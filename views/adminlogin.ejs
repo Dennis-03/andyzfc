@@ -1,0 +1,41 @@
+<div style="margin-top: 10%;">
+  <h1 class="text-center">Admin Login</h1>
+  <div class="container pt-3">
+    <div class="row justify-content-sm-center">
+      <div class="col-sm-6 col-md-4">
+        <div class="card border-info text-center">
+          <div class="card-header">
+            Sign in to continue
+          </div>
+          <div class="card-body">
+            <form class="form-signin" action="/admin" method="POST">
+              <h6 class="float-left">User Name:</h6>
+              <input
+                type="text"
+                class="form-control mb-2"
+                placeholder="User Name"
+                name="username"
+                required
+                autofocus
+              />
+              <h6 class="float-left">Password:</h6>
+              <input
+                type="password"
+                class="form-control mb-2"
+                name="password"
+                placeholder="Password"
+                required
+              />
+              <button
+                class="btn btn-lg btn-primary btn-block mb-1"
+                type="submit"
+              >
+                Sign in
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

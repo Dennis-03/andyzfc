@@ -1,0 +1,320 @@
+<div id="news" class="tab-pane active">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Heading</th>
+        <th>Image Source</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Source</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% news.forEach((news)=>{ %> <% if (news.archive==false){ %>
+      <tr>
+        <th>
+          <!-- <i class="fa fa-check"></i> -->
+          <%=news.newsHeader %>
+        </th>
+        <td>
+          <img src="<%= news.imageSrc %>" width="180" />
+        </td>
+        <td><%= news.description %></td>
+        <td class="text-capitalize"><%= news.type %></td>
+        <td><a href="<%= news.source %>"><%= news.source %></a></td>
+        <td>
+          <a href="/admin/news/archive/<%= news.id %> ">
+            <button class="btn btn-danger" style="width: 98px;">
+              Archive
+            </button>
+          </a>
+          <!-- <a href="/admin/news/get/<%= news.id %> "> -->
+          <button
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#edit<%= news.id %>"
+            style="width: 98px;"
+          >
+            Edit
+          </button>
+          <!-- </a> -->
+          <div
+            class="modal fade"
+            id="edit<%= news.id %>"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Edit News
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form
+                    action="/admin/news/update/<%= news.id %>"
+                    method="POST"
+                    enctype="multipart/form-data"
+                  >
+                    <div class="form-group">
+                      <label class="col-form-label">Header</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="recipient-name"
+                        name="newsHeader"
+                        value="<%= news.newsHeader %> "
+                        required
+                      />
+                      <label class="col-form-label">
+                        Description
+                      </label>
+                      <textarea
+                        class="form-control"
+                        id="message-text"
+                        name="description"
+                        required
+                      >
+    <%= news.description %> </textarea
+                      >
+                      <label class="col-form-label">
+                        Type
+                      </label>
+                      <div>
+                        <% if (news.type=="global"){ %>
+                        <label class="radio-inline">
+                          <input
+                            type="radio"
+                            name="type"
+                            value="global"
+                            checked
+                            required
+                          />Global
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="type" value="local" />Local
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="type" value="event" />Event
+                        </label>
+                        <% }else if(news.type=="event"){ %>
+                        <label class="radio-inline">
+                          <input
+                            type="radio"
+                            name="type"
+                            value="global"
+                            required
+                          />Global
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="type" value="local" />Local
+                        </label>
+                        <label class="radio-inline">
+                          <input
+                            type="radio"
+                            name="type"
+                            value="event"
+                            checked
+                          />Event
+                        </label>
+                        <% }else{ %>
+                        <label class="radio-inline">
+                          <input
+                            type="radio"
+                            name="type"
+                            value="global"
+                            required
+                          />Global
+                        </label>
+                        <label class="radio-inline">
+                          <input
+                            type="radio"
+                            name="type"
+                            value="local"
+                            checked
+                          />Local
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="type" value="event" />Event
+                        </label>
+                        <% } %>
+                      </div>
+                      <label class="col-form-label">
+                        Image
+                      </label>
+                      <div>
+                        <input
+                          type="file"
+                          name="imageSrc"
+                          id="imageSrc"
+                          value="<% news.imageSrc %> "
+                        />
+                      </div>
+                      <label class="col-form-label">Source</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="recipient-name"
+                        name="source"
+                        value="<%= news.source %> "
+                        required
+                      />
+                      <hr />
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button type="submit" class="btn btn-primary">
+                        Update
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% if (news.status==true){ %>
+          <a href="/admin/news/unpublish/<%= news.id %> ">
+            <button class="btn btn-secondary" style="width: 98px;">
+              Unpublish
+            </button>
+          </a>
+          <% }else{ %>
+          <a href="/admin/news/publish/<%= news.id %> ">
+            <button class="btn btn-success" style="width: 98px;">
+              Publish
+            </button>
+          </a>
+          <% } %>
+        </td>
+      </tr>
+
+      <% } %> <% }) %>
+    </tbody>
+  </table>
+  <button
+    class="btn btn-primary fa fa-plus"
+    style="
+      position: fixed;
+      bottom: 50px;
+      right: 50px;
+      border-radius: 50%;
+      font-size: 35px;
+      width: 60px;
+      height: 60px;
+    "
+    data-toggle="modal"
+    data-target="#exampleModal"
+  ></button>
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New News</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form
+            action="/admin/news"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <div class="form-group">
+              <label class="col-form-label">Header</label>
+              <input
+                type="text"
+                class="form-control"
+                id="recipient-name"
+                name="newsHeader"
+                required
+              />
+              <label class="col-form-label">
+                Description
+              </label>
+              <textarea
+                maxlength="200"
+                class="form-control"
+                id="message-text"
+                name="description"
+                required
+              ></textarea>
+              <label class="col-form-label">
+                Type
+              </label>
+              <div>
+                <label class="radio-inline">
+                  <input
+                    type="radio"
+                    name="type"
+                    value="global"
+                    required
+                  />Global
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="type" value="local" />Local
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="type" value="event" />Event
+                </label>
+              </div>
+              <label class="col-form-label">
+                Image
+              </label>
+              <div>
+                <input type="file" name="imageSrc" id="imageSrc" required />
+              </div>
+              <label class="col-form-label">Source</label>
+              <input
+                type="url"
+                class="form-control"
+                id="recipient-name"
+                name="source"
+                required
+              />
+              <hr />
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
