@@ -22,7 +22,9 @@
         </td>
         <td><%= news.description %></td>
         <td class="text-capitalize"><%= news.type %></td>
-        <td><a href="<%= news.source %>"><%= news.source %></a></td>
+        <td>
+          <a href="<%= news.source %>" target="_blank"><%= news.source %></a>
+        </td>
         <td>
           <a href="/admin/news/archive/<%= news.id %> ">
             <button class="btn btn-danger" style="width: 98px;">
