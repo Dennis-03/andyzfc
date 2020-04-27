@@ -65,7 +65,8 @@ router.post("/news", upload.single("imageSrc"), (req, res, next) => {
   const type = req.body.type;
   const source = req.body.source;
 
-  const imageSrc = "uploads/news/" + req.file.filename;
+  const imageSrc =
+    "http://andyzfc.herokuapp.com/uploads/news/" + req.file.filename;
   // console.log(newsHeader);
   // console.log(description);
   // console.log(type);
