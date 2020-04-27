@@ -116,7 +116,7 @@ router.get("/news/archive/:id", async (req, res, next) => {
 router.get("/news/publish/:id", async (req, res, next) => {
   const id = req.params.id;
   const time = new Date(Date.now());
-  // console.log(time);
+  console.log(time);
   await News.findOneAndUpdate(
     { _id: id },
     {

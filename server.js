@@ -58,7 +58,7 @@ mongoose.connect(uri, {
 });
 const db = mongoose.connection;
 db.on("error", (error) => console.error(error));
-db.once("open", () => console.log("Connected to Mongoose"));
+db.once("open", () => console.log("Connected to Mongoose DB"));
 
 app.get("/", (req, res) => {
   res.render("adminlogin");
