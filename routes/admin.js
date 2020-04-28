@@ -66,6 +66,8 @@ router.post("/news", upload.single("imageSrc"), (req, res, next) => {
   const source = req.body.source;
 
   const imageSrc = "uploads/news/" + req.file.filename;
+  const imageLink =
+    "https://andyzfc.herokuapp.com/uploads/news/" + req.file.filename;
   // console.log(newsHeader);
   // console.log(description);
   // console.log(type);
@@ -77,6 +79,7 @@ router.post("/news", upload.single("imageSrc"), (req, res, next) => {
     source,
     description,
     type,
+    imageLink,
   });
 
   newNews
@@ -169,6 +172,9 @@ router.post(
     // console.log(type);
     if (req.file != undefined) {
       const imageSrc = "uploads/news/" + req.file.filename;
+      const imageLink =
+        "https://andyzfc.herokuapp.com/uploads/news/" + req.file.filename;
+
       // console.log(imageSrc);
       await News.findOneAndUpdate(
         { _id: id },
@@ -178,6 +184,7 @@ router.post(
           type,
           imageSrc,
           source,
+          imageLink,
         },
         { new: true }
       );

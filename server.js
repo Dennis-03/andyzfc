@@ -29,6 +29,7 @@ app.set("view engine", "ejs");
 // app.use(cors);
 app.set("layout", "layouts/layout");
 app.use("/uploads", express.static("uploads"));
+app.use("https://andyzfc.herokuapp.com/uploads", express.static("uploads"));
 app.use(expressLayouts);
 
 app.use((req, res, next) => {
